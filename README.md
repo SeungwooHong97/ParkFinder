@@ -21,259 +21,66 @@ https://parkfinder.fujiikaze.kr/<br/>
 <br/><br/>
 
 ## 👨‍🏫 프로젝트 소개
-**"Park Finder" - 주차장을 빠르고 정확하게 찾을 수 있는 웹 서비스**<br/>
-도심 지역에서 주차 문제는 점점 더 심화되고 있고, 이에 따라 주차장을 손쉽게 찾을 수 있는 서비스에 대한 필요성이 증가하고 있습니다.<br/>
-기존의 지도 서비스는 주차장 정보가 부족하거나 사용자 경험이 불편한 경우가 많았기 때문에, 이를 개선하고자 "Park Finder"를 개발하게 되었습니다.<br/>
+**"흑백 요리사" - 최근 흥행한 넷플릭스 흑백요리사에 출연한 셰프들의 식당 정보가 취합된 웹 사이트**<br/>
+최근 흑백요리사 프로그램이 굉장히 흥행하여, 유행을 선두하고 있는 가운데 그 수많은 요리사들의 음식점을 따로 따로 검색하고, <br>
+사용자가 일일이 찾아야하는 사용자의 양상을 최근 발견 <br>
+→ 이 흑백요리사 프로그램의 요리하시는 분들의 식당정보만 취합된 사이트가 있으면 좋겠다 라는 생각에서 Start.
 <br/>
 
 ## 👨‍👩‍👧‍👦 팀소개
-조아영 - https://github.com/ayoung-j<br/>
-노용철 - https://github.com/RYC0208<br/>
-장세희 - https://github.com/Sehee-Jang<br/>
-최지민 - http://github.com/jigong2024<br/>
-홍승우 - https://github.com/FujiiKaze97<br/>
+박민정 - https://github.com/mingjeongg<br/>
+정민지 - https://github.com/jungminji0215<br/>
+한수빈 - https://github.com/hansub1n<br/>
+홍승우 - https://github.com/SeungwooHong97<br/>
 <br/>
 
 ## 💡 프로젝트 목적
-카카오 API를 활용하여 사용자에게 가장 가까운 주차장을 실시간으로 제공하고, 지도 상에 정확한 위치를 표시하여 사용자 편의를 극대화하는 것을 목표로 합니다.<br/>
-빠른 검색 속도와 직관적인 UI, 최신 주차장 정보 제공을 통해 기존 지도 서비스와 차별화된 경험을 제공합니다.<br/>
-이를 통해 사용자는 실시간 위치 기반으로 주차장을 쉽게 검색하고 정보를 확인할 수 있습니다.<br/>
+**"흑백 요리사" - 최근 흥행한 넷플릭스 흑백요리사에 출연한 셰프들의 식당 정보가 취합된 웹 사이트**<br/>
+최근 흑백요리사 프로그램이 굉장히 흥행하여, 유행을 선두하고 있는 가운데 그 수많은 요리사들의 음식점을 따로 따로 검색하고, <br>
+사용자가 일일이 찾아야하는 사용자의 양상을 최근 발견 <br>
+→ 이 흑백요리사 프로그램의 요리하시는 분들의 식당정보만 취합된 사이트가 있으면 좋겠다 라는 생각에서 Start.
 <br/>
 
 ## 💜 주요기능
 
-### 메인화면
+### 주요 기능 1
 
-![메인화면](https://github.com/user-attachments/assets/9d750d6d-c63d-459d-a55d-fe70a823bedb)
+gif 추가 부탁
 
-### 주차장 상세 조회
+### 주요 기능 2
 
-![주차장 상세 조회](https://github.com/user-attachments/assets/e5da9f0b-eae6-4c31-919d-e7f909338d3e)
+gif 추가 부탁
 
-### 주차장 검색
+### 주요 기능 3
 
-![주차장 검색](https://github.com/user-attachments/assets/e73a18a9-743b-4ee5-b3aa-d6eff3a0a415)
+gif 추가 부탁
 
-```jsx
-useEffect(() => {
-  if (!map || !location.center) return;
-  setOpenMarkerId(null);
-  searchPlaces(location.center, currentPage); // 검색 실행
-}, [map, searchValue, currentPage, location.center]); // searchValue(map, location.center, currentPage)가 변경되면, searchPlaces 함수를 호출하여 검색
+### 주요 기능 4
+gif 추가 부탁
 
-// 검색하기
-const handleSearch = (e) => {
-  e.preventDefault();
-  setSearchValue(keyword); // 최종적으로 입력된 검색어를 설정
-  setIsSidebarDetailOpen(false); // 검색 시 사이드바 상세 정보 닫기
-  return false;
-};
+### 주요 기능 5
+gif 추가 부탁 
 
-// 폼 제출 시 searchValue에 최종 입력된 keyword 전달
-<form onSubmit={handleSearch}>
-  <div className="search-input">
-    <input
-      type="text"
-      value={keyword}
-      placeholder="주차장 앞 키워드만 입력해 주세요"
-      className="input"
-      onChange={(e) => setKeyword(e.target.value)} // 입력된 값을 실시간으로 keyword에 저장
-    />
-    <button type="submit">
-      <span className="material-symbols-rounded text-zinc-400">search</span>
-    </button>
-  </div>
-</form>;
-```
-
-**검색 기능 구현**<br/>
-검색창에 글자를 입력할 때마다 searchPlaces()가 호출되지 않도록 최적화된 방식을 적용했습니다.<br />
-사용자가 입력을 완료한 후, 최종적으로 입력된 검색어(searchValue)에 대해서만 검색이 이루어지도록 설계하여 불필요한 API 요청 및 함수 호출을 방지했습니다.<br />
-이를 통해 성능을 최적화했으며, 사용자가 검색어를 입력하는 도중 성급하게 검색이 실행되지 않도록 하여 불필요한 검색 결과를 줄임으로써 사용자 경험을 크게 개선할 수 있었습니다.
 
 ### 주차장 즐겨찾기
 
-![주차장 즐겨찾기 기능](https://github.com/user-attachments/assets/70db5418-f74e-46b5-995e-3797b764ee55)
-
-```jsx
-const createPlaceAndUpdate = async ({ place, userId }) => {
-  try {
-    const places = await fetchPlaces();
-    const existingPlace = places.find((existingPlace) => existingPlace.id === place.id);
-
-    if (existingPlace) {
-      return await updateBookmark(existingPlace, userId);
-    } else {
-      return await createNewPlace(place, userId);
-    }
-  } catch (error) {
-    console.error("장소 확인 중 오류 발생:", error);
-  }
-};
-```
-
-북마크 기능은 머니풀 서버의 유저 테이블을 수정할 수 없었기 때문에
-북마크 버튼을 누르면 해당 장소에 대한 데이터를 db.json 담아서 북마크 버튼을 누른
-사용자의 id를 장소의 bookmarks 배열에 기록하였습니다. 내가 누른 북마크의 UI를 변경시키고
-마이페이지에서도 그 리스트를 확인할 수 있습니다.
-
-db.json에 인자로 전달받은 장소의 데이터가 이미 존재하는지의 여부에 따라서
-createNewPlace 혹은 updateBookmark 함수를 호출할 수 있도록 조건문을 넣어주었습니다.
-
-사용자 경험 향상을 위해 Tanstack Query의 onMutate 옵션을 사용하여 낙관적 업데이트를 구현했습니다.
-
-### 댓글 추가
-
-![댓글 추가](https://github.com/user-attachments/assets/88cdcae1-e3e4-40d4-8ab5-800fb47e1910)
-
-```jsx
-const { data: latestUserInfo } = useQuery({
-  queryKey: ["userInfo", user?.id],
-  queryFn: () => getUserProfile(token),
-  enabled: !!user && !!token // 유저와 토큰이 있을 때만 쿼리 실행
-});
-useEffect(() => {
-  if (latestUserInfo) {
-    setUser(latestUserInfo);
-  }
-}, [latestUserInfo, setUser]);
-const updatedComments = useMemo(() => {
-  if (!comments) return [];
-  return comments.map((comment) => {
-    if (comment.userId === user?.id) {
-      return {
-        ...comment,
-        nickname: user.nickname,
-        avatar: user.avatar
-      };
-    }
-    return comment;
-  });
-}, [comments, user]);
-```
-
-**최신 유저 정보와 댓글 데이터 동기화**<br/>
-: useQuery를 사용해 최신 유저 정보를 가져오고 useEffect를 사용해 전역 상태를 업데이트 해주고 이를 통해 최신 유저 정보를 유지할 수 있었습니다.<br/>
-: useMemo를 사용해 댓글 목록과 유저 정보가 변경될 때만 댓글 데이터를 재계산합니다. 이는 불필요한 렌더링을 방지하여 애플리케이션의 성능을 향상시킵니다.<br/>
-불필요한 렌더링을 방지할 수 있어서 자랑스러운 코드라고 생각합니다!<br/>
-
-### 댓글 수정 및 삭제
-
-![댓글 수정 및 삭제](https://github.com/user-attachments/assets/ebb53187-4054-44c7-85c1-02dece44b1ba)
-
-### 회원가입
-
-![회원가입](https://github.com/user-attachments/assets/48dae8ec-74be-45d7-ba68-c868aa628270)
-
-```jsx
-const handleSignup = async (formData) => {
-  try {
-    await register(formData);
-    toast.success("회원가입이 완료되었습니다. 로그인해주세요.");
-    navigate("/login");
-  } catch (error) {
-    toast.error("회원가입에 실패했습니다. 다시 시도해주세요.");
-  }
-};
-```
-
-**유효성 검사 및 회원가입 처리**<br />
-Toast 알림: react-toastify를 활용하여 회원가입 성공 및 실패 시 사용자에게 알림을 제공합니다.
-유효성 검사: 회원가입 폼에서는 이름과 닉네임 필드를 추가하여 유효성을 검사하고 있습니다.
-
-### 로그인
-
-![로그인](https://github.com/user-attachments/assets/8a592ab6-37ab-484a-90c9-75d5035d3808)
-
-```jsx
-const handleLogin = async (formData) => {
-  try {
-    const loginData = await login(formData);
-    const userProfile = await getUserProfile(loginData.accessToken);
-    setAuth(userProfile, loginData.accessToken);
-    navigate("/"); // 로그인 후 홈으로 이동
-  } catch (error) {
-    alert("로그인에 실패했습니다. 다시 시도해주세요.");
-  }
-};
-```
-
-**유효성 검사 및 로그인 처리**<br />
-로그인 유효성 검사: 아이디와 비밀번호가 각각 5자, 8자 이상인지 확인 후 로그인 요청을 보냅니다.
-상태 관리: Zustand를 사용하여 전역 상태에서 사용자 프로필 및 액세스 토큰을 관리합니다.
-에러 처리: 로그인 실패 시 사용자에게 알림을 띄워주는 에러 처리 로직을 포함합니다.
-
-**로그인 및 회원가입 폼 유효성 검사**<br />
-
-```jsx
-const validateForm = () => {
-  let isValid = true;
-  let newErrors = {
-    id: "",
-    password: "",
-    name: "",
-    nickname: ""
-  };
-
-  if (!formData.id || formData.id.length < 5) {
-    newErrors.id = "아이디는 최소 5자 이상이어야 합니다.";
-    isValid = false;
-  }
-
-  if (!formData.password || formData.password.length < 8) {
-    newErrors.password = "비밀번호는 최소 8자 이상이어야 합니다.";
-    isValid = false;
-  }
-
-  if (mode === "signup" && !formData.name) {
-    newErrors.name = "이름을 입력해주세요.";
-    isValid = false;
-  }
-
-  setErrors(newErrors);
-  return isValid;
-};
-```
-
-폼 유효성 검사: 사용자가 입력한 정보가 유효한지 검증합니다. 비밀번호는 최소 8자, 아이디는 최소 5자 이상이어야 하며, 회원가입일 경우 이름 필드를 필수로 입력해야 합니다.
-실시간 에러 메시지: 잘못된 입력이 있을 경우 해당 필드 아래에 오류 메시지를 실시간으로 표시합니다.
-
-### 로그아웃
-
-![로그아웃](https://github.com/user-attachments/assets/a80d6f4b-216c-4b10-aff2-8d1bee7c7110)
-
-### 프로필 수정
-
-![프로필 수정](https://github.com/user-attachments/assets/96604818-81b9-467d-a20a-ae642e7e5e9c)
-
-```jsx
-const handleImageChange = (e) => {
-  const file = e.target.files[0];
-  if (file) {
-    const objectUrl = URL.createObjectURL(file); // 파일을 URL로 변환
-    document.getElementById("imgPrev").src = objectUrl;
-    setImgSrc(file);
-  }
-};
-```
-
-파일을 url로 변환하여 파일 등록 후 이미지는 변경된 것처럼 사용자에게 표시하되, 전송 프로토콜 규칙에 맞추어 file은 url형식이 아닌 file 형식 그 자체로 전송하도록 Problem solve 한 것을 자랑스러운 코드라고 생각합니다.
-<br/><br/>
-
 ## ⏲️ 개발기간
 
-2024.09.12(목) ~ 2024.09.23(월)<br/>
+2024.10.10(목) ~ 2024.10.17(목)<br/>
 <br/>
 
 ## 📚️ 기술스택
+![image](https://github.com/user-attachments/assets/d2ebc2be-050f-417b-8d42-22ea5e639122)
 
 ### ✔️ Language
-
 ![js](https://img.shields.io/badge/JavaScript-F7DF1E?style=for-the-badge&logo=JavaScript&logoColor=white)
 ![html](https://img.shields.io/badge/HTML-239120?style=for-the-badge&logo=html5&logoColor=white)
 ![css](https://img.shields.io/badge/CSS-239120?&style=for-the-badge&logo=css3&logoColor=white)
-![Tailwind_CSS](https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white)
-![Jsx](https://img.shields.io/badge/Jsx-666666?style=for-the-badge)
+![Next.js](https://img.shields.io/badge/Jsx-666666?style=for-the-badge)
+![TypeScript](https://img.shields.io/badge/Jsx-666666?style=for-the-badge)
+
+
+
 
 ### ✔️ Version Control
 
@@ -286,15 +93,14 @@ const handleImageChange = (e) => {
 ### ✔️ Framework
 ![React](https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB)
 ![React_Router](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
+![Next.js](https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white)
 
 ### ✔️ Deploy
 ![Vercel](https://img.shields.io/badge/Vercel-000000?style=for-the-badge&logo=vercel&logoColor=white)
 ![Glitch](https://img.shields.io/badge/Glitch-2800ff?style=for-the-badge&logo=glitch&logoColor=white)
 
 ### ✔️ DBMS
-
-![json-server](https://img.shields.io/badge/json_server-666666?style=for-the-badge)<br/>
-db.json - 댓글 , 즐겨찾기 Feature에서 사용 중
+![Supabase](https://img.shields.io/badge/Jsx-666666?style=for-the-badge)
 
 ### ✔️ State
 
@@ -599,19 +405,14 @@ createdAt: new Date().toISOString()
 <br/><br />
 
 ## 🗨 Project Remind & 프로젝트 소감
-#### 조아영
-카카오 API의 여러 기능을 실제 서비스에 적용해보는 유익한 경험이었습니다. 팀원들과의 협업 과정에서 다양한 이슈들이 발생했지만 원활한 소통을 통해 신속히 해결할 수 있었습니다. 이번 프로젝트를 통해 API 통합 및 협업의 중요성을 깊이 이해할 수 있었습니다.
+#### 박민정
 
-#### 노용철
-Zustand와 Tanstack Query를 사용하여 클라이언트 전역 상태 및 서버 상태를 관리하여 효율적으로 로직을 분배하는 방법을 알게 되었고 팀과 협업하여 서로에게 필요한 부분들에 대해 소통하여 개선하는 방식이 좋았으며 외부 API를 사용하여 웹 서비스의 퀄리티를 올리고 사용자에게 더 나은 서비스를 경험시킬 수 있다고 생각했습니다
 
-#### 장세희
-이번 프로젝트 기간동안 팀워크가 너무 좋고 팀 분위기가 좋아서 큰 문제없이 프로젝트를 잘 마무리 할 수 있었던거 같습니다. 소통은 물론 피드백 또한 즉각적으로 이루어져서 너무 좋았고, 서로를 존중하고 배려한다는 것을 많이 느낄 수 있었습니다! 프로젝트 기간동안 연휴가 겹쳤음에도 불구하고 다들 너무 고생 많으셨고 다음 팀프로젝트에도 다시 만났으면 좋겠습니다! :)
+#### 정민지
 
-#### 최지민
-이번 프로젝트를 통해 Tanstack Query의 강력한 기능을 실제로 경험할 수 있었습니다. 특히 낙곽적 업데이트 구현 과정에서 사용자 경험 개선의 중요성을 깊이 이해하게 되었습니다. 또한, 팀원들과의 원활한 협업 덕분에 기술적 도전을 효과적으로 극복할 수 있었고 이는 프로젝트의 성공에 큰 도움이 되었습니다!
+
+#### 한수빈
+
 
 #### 홍승우
-팀원 간 서로 존중하고 ,의견 충돌없이 대부분의 방향성에서 부드럽게 흘러갔던 프로젝트였습니다.
-전달 사항이 있을 때마다, Slack, 구두를 통한 커뮤니케이션을 통해, 각자 맡은 역할을 , 필수 구현 사항에 맞게 적절히 구현 할 수 있는 구현 시간 내에서 잘 구현했다고 생각합니다.
-아쉬운 점으로는 Git PR에 대한 comment나 코드 리뷰를 제대로 활용하지는 못하였기에, 추후 시간이 된다면 이를 활용할 수 있었으면 좋겠다는 생각도 듭니다.
+
